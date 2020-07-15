@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+<!-- 핵심구역 -->
+<bean id="messageBeanImpl" class="sample03_Advice.MessageBeanImpl"></bean>
+
+<!-- 공통구역 -->
+<bean id="loggingBeforeAdvice" class="sample03_Advice.LoggingBeforeAdvice"></bean>
+<bean id="loggingAfterAdvice" class="sample03_Advice.LoggingAfterAdvice"></bean>
+<bean id="loggingAroundAdvice" class="sample03_Advice.LoggingAroundAdvice"></bean>
+
+<!-- target(핵심구역) 안에 공통구역을 넣어줌 그 기능을 하는 것이 바로 proxy!!!
+interceptorNames 안의 value 에 loggingBeforeAdvice 라는 것을 target 안에 넣어준다고 이해하면 됨 -->
+<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+	<property name="target" ref="messageBeanImpl"></property>
+	<property name="interceptorNames">
+		<list>
+			<value>loggingBeforeAdvice</value>
+			<value>loggingAfterAdvice</value>
+			<value>loggingAroundAdvice</value>
+		</list>
+	</property>
+</bean>
+</beans>

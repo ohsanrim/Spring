@@ -46,6 +46,17 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 		String sql = "select count(*) from usertable where id=?";
 		return getJdbcTemplate().queryForObject(sql, Integer.class, id);
 	}
+//	@Override
+//	   public UserDTO getUser(String id) {
+//	      String sql = "select * from usertable where id = ?";
+//	      UserDTO userDTO = null;
+//	      try {
+//	         userDTO = getJdbcTemplate().queryForObject(sql, new BeanPropertyRowMapper<UserDTO>(UserDTO.class), id);
+//	      } catch (EmptyResultDataAccessException e) {
+//	         
+//	      }
+//	      return userDTO;
+//	   }
 
 	@Override
 	public void modify(UserDTO userDTO) {

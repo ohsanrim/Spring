@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userSQL">
+	<select id="checkId" parameterType="String" resultType="user">
+		select * from usertable where id=#{id}
+	</select>
+	
+	<insert id="write" parameterType="user">
+		insert into usertable values(#{name},#{id},#{pwd})
+	</insert>
+	
+	<select id="getUser" parameterType="String" resultType="user">
+		select * from usertable where id=#{id}
+	</select>
+	
+	<select id="getUserCount" parameterType="String" resultType="int">
+		select count(*) from usertable where id=#{id}
+	</select>
+	
+	<update id="modify" parameterType="user">
+		update usertable set name=#{name},pwd=#{pwd} where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from usertable where id=#{id}
+	</delete>
+	<select id="getUserList" resultType="user">
+		select * from usertable
+	</select>
+	<select id="getUserListOne" parameterType="String" resultType="user">
+		select * from usertable where id=#{id}
+	</select>
+		<select id="getSearchUserList" parameterType="java.util.Map" resultType="user">
+<!-- 		<if test="searchOption=='id'">
+		select * from usertable where id like '%'||#{searchText}||'%'
+		</if>
+		<if test="searchOption=='name'">
+		select * from usertable where name like '%'||#{searchText}||'%'
+		</if> -->
+		select * from usertable where ${searchOption} like '%'||#{searchText}||'%'
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

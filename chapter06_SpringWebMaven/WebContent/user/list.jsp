@@ -78,6 +78,11 @@ $('#searchBtn').click(function(){
 		type: 'post',
 		url: '/chapter06_SpringWebMaven/user/getSearchUserList',
 		data:"searchOption="+searchOption+"&searchText="+searchText,
+		/*data:JSON.stringify({
+			'searchOption':$('#searchOption').val(),
+			'searchText':$('#searchText').val()
+		})*/
+		contentType:'application/json;charset=UTF-8',
 		dataType: 'json',
 		success: function(data){
 				$.each(data.list, function(index, items){

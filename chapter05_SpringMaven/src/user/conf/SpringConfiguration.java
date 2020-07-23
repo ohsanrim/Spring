@@ -20,8 +20,6 @@ import user.service.UserUpdateService;
 
 @Configuration
 public class SpringConfiguration {
-
-
 	  @Bean(name="dataSource") 
 	  public BasicDataSource dataSource() {
 		  BasicDataSource basicDataSource = new BasicDataSource();

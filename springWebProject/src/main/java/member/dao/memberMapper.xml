@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberSQL">
+	<insert id="writeMember" parameterType="member.bean.MemberDTO" >
+	<if test="pwd!=null">
+		insert into member values(#{name},#{id},#{pwd},#{gender},#{email1},#{email2},#{tel1},#{tel2},#{tel3},#{zipcode},#{addr1},#{addr2},sysdate)
+	</if>
+	<if test="pwd==null">
+		insert into member(name,id, pwd, gender, email1, email2, tel1, logtime) values(#{name},#{id},nvl(#{pwd},'111'),#{gender},#{email1},#{email2},#{tel1},sysdate)
+	</if>
+	</insert>
+	
+	<select id="isExisted"  parameterType="String" resultType="member.bean.MemberDTO">
+		select * from member where id=#{id}
+	</select>
+
+	<select id="loginMember"  parameterType="HashMap" resultType="member.bean.MemberDTO">
+		select * from member where id=#{id} and pwd=#{pwd}
+	</select>
+	<select id="getZipcodeList" parameterType="hashMap" resultType="member.bean.MemberDTO">
+		select * from newzipcode where sido like '%'||#{sido}||'%' and nvl(sigungu,'0') like '%'||#{sigungu}||'%' and roadname like '%'||#{roadname}||'%'
+	</select>
+	<update id="modifyMember" parameterType="member.bean.MemberDTO">
+		update member set name=#{name}, pwd=#{pwd}, gender=#{gender}, email1=#{email1},email2=#{email2},tel1=#{tel1},tel2=#{tel2},tel3=#{tel3},zipcode=#{zipcode}, addr1=#{addr1}, addr2=#{addr2}, logtime=sysdate where id=#{id}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
